@@ -20,3 +20,4 @@
 ### mysql 
 + DATE_FORMAT(날짜,형식) : 날짜를 지정한 형식으로 출력 <br> 형식은 '%Y %m %d' 사용 <br> hour(시간데이터)로 시간 접근 가능
 + SET @변수이름 := 초기값;
++ NULL 처리하기 <br> NULL값 채우기 ISNULL(변수,'대체 값') <br> 변수 IS NULL (or 변수 IS NOT NULL)
