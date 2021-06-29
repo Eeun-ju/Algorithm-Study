@@ -21,3 +21,35 @@
 + DATE_FORMAT(날짜,형식) : 날짜를 지정한 형식으로 출력 <br> 형식은 '%Y %m %d' 사용 <br> hour(시간데이터)로 시간 접근 가능
 + SET @변수이름 := 초기값;
 + NULL 처리하기 <br> NULL값 채우기 ISNULL(변수,'대체 값') <br> 변수 IS NULL (or 변수 IS NOT NULL)
++ 출력 개수는 limit로 제한 ex) order by 변수 limit 개수
++ 글자 비교는 like ex) 변수 like 'happy%' -- 앞글자가 happy로 시작하는 단어
+#### JOIN 구문
+  
+  ##### 1. INNER JOIN 구문
+  tabel1, table2의 일치되는 same_feature 내용을 가져온다
+  
+    select table1.name, tabel2.date
+    from table1
+    inner join table2
+    on tabel1.same_feature = tabel2.same_feature
+    oreder by tabel1.name;
+    
+      
+ ##### 2. LEFT JOIN 구문(LEFT를 포함한 교집합)
+ tabel1을 기준으로 table2의 일치되는 same_feature 내용을 table1 뒤에 붙이고 불일치 데이터는 NULL 채움
+  
+    select *
+    from table1
+    left join table2
+    on tabel1.same_feature = tabel2.same_feature
+    
+  ##### 3. RIGHT JOIN 구문(RIGHT를 포함한 교집합)
+ tabel2을 기준으로 table1의 일치되는 same_feature 내용을 table1 뒤에 붙이고 불일치 데이터는 NULL 채움<br>
+ right join table => talbe을 중심으로 
+  
+    select *
+    from table1
+    right join table2
+    on tabel1.same_feature = tabel2.same_feature
+    
+  
