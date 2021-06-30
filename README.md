@@ -52,4 +52,21 @@
     right join table2
     on tabel1.same_feature = tabel2.same_feature
     
-  
+#### CASE WHEN 구문  
+
+    select col1, col2, case when 조건1 then 값1 when 조건2 then 값2 else 값3 end as 새로운 컬럼 이름
+    from table1
+    
+    -- 조건에 포함되지 않는 경우만 다른 when으로 내려감! 
+    select *,(
+      case
+         when size < 10 then 'small'
+         when size < 30 then 'medium'
+         when size < 50 then 'large'
+         else 'extra'
+      end) as '크기'
+    from datatable
+   
+   
+   
+
