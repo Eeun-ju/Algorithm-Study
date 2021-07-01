@@ -17,12 +17,48 @@
 
 
 
-### mysql 
+### mysql (MariaDB 쿼리 문법 정리)
 + DATE_FORMAT(날짜,형식) : 날짜를 지정한 형식으로 출력 <br> 형식은 '%Y %m %d' 사용 <br> hour(시간데이터)로 시간 접근 가능
 + SET @변수이름 := 초기값;
 + NULL 처리하기 <br> NULL값 채우기 ISNULL(변수,'대체 값') <br> 변수 IS NULL (or 변수 IS NOT NULL)
-+ 출력 개수는 limit로 제한 ex) order by 변수 limit 개수
-+ 글자 비교는 like ex) 변수 like 'happy%' -- 앞글자가 happy로 시작하는 단어
++ 출력 개수는 limit로 제한 ex) order by 변수 limit 개수 <br> 3번째 row부터 11번째 row까지 조회 Limit 2,10;
++ 데이터 개수, 카운트(COUNT) ex) count(*) 전체 개수, COUNT(컬럼) 특정 컬럼의 개수
++ 글자 비교는 like ex) 변수 like 'happy%' -- 앞글자가 happy로 시작하는 단어 <br> '%happy' 끝부분이 happy인 경우, '%happy%' happy가 들어간느 모든 값
++ 특정 컬럼을 그룹화 하는 GROUP BY, 특정 컬럼을 그룹화한 결과에 조건을 거는 HAVING <br> WHERE은 그룹화 하기 전, HAVING은 그룹 후 조건
++ NULL값 처리 (IFNULL) <br> 해당 필드값이 NULL이라면 다른 값으로 반환 IFNULL('컬러명,'반환값')
+
+#### LIKE 
+    
+    SELECT *
+    FROM STUDENT
+    WHERE STUDENT_ID like 'a%'
+    
+    LIKE 'a%' a로 시작하는 모든 값
+    LIKE 'a_%_%' a로 시작되고 최소 3이상 길이를 가진 값
+    LIKE '_a%' 두번쨰 자리가 a인 모든 값
+    
+#### Between
+  where 절 내 검색 조건으로 범위를 지정하고자 할 때
+  
+    select *
+    from products
+    wher price between 10 and 20
+    
+    select *
+    from products
+    where price not between 10 and 20
+
+#### 중복 제거 (DISTINCT, GROUP BY)
+
+    SELECT COUNT(DISTINCT NAME) AS NAME_COUNT 
+    FROM ANIMAL_INS 
+    WHERE NAME IS NOT NULL
+    
+    SELECT COUNT(NAME) 
+    FROM ANIMAL_INS
+    WHERE NAME IS NOT NULL
+    GROUP BY NAME;
+
 #### JOIN 구문
   
   ##### 1. INNER JOIN 구문
