@@ -20,12 +20,35 @@
 ### mysql (MariaDB 쿼리 문법 정리)
 + DATE_FORMAT(날짜,형식) : 날짜를 지정한 형식으로 출력 <br> 형식은 '%Y %m %d' 사용 <br> hour(시간데이터)로 시간 접근 가능
 + SET @변수이름 := 초기값;
-+ NULL 처리하기 <br> NULL값 채우기 ISNULL(변수,'대체 값') <br> 변수 IS NULL (or 변수 IS NOT NULL)
++ NULL 처리하기 <br> NULL값 채우기 IFNULL(변수,'대체 값') <br> 변수 IS NULL (or 변수 IS NOT NULL)
 + 출력 개수는 limit로 제한 ex) order by 변수 limit 개수 <br> 3번째 row부터 11번째 row까지 조회 Limit 2,10;
 + 데이터 개수, 카운트(COUNT) ex) count(*) 전체 개수, COUNT(컬럼) 특정 컬럼의 개수
 + 글자 비교는 like ex) 변수 like 'happy%' -- 앞글자가 happy로 시작하는 단어 <br> '%happy' 끝부분이 happy인 경우, '%happy%' happy가 들어간느 모든 값
 + 특정 컬럼을 그룹화 하는 GROUP BY, 특정 컬럼을 그룹화한 결과에 조건을 거는 HAVING <br> WHERE은 그룹화 하기 전, HAVING은 그룹 후 조건
-+ NULL값 처리 (IFNULL) <br> 해당 필드값이 NULL이라면 다른 값으로 반환 IFNULL('컬러명,'반환값')
+
+#### [프로그래머스-입양 시각 구하기1](PRO/59412.sql)
+
+ 
+    SELECT DATE_FORMAT(DATETIME,'%H') AS H, COUNT(DATETIME)
+    FROM ANIMAL_OUTS
+    GROUP BY H
+    HAVING H BETWEEN 9 AND 19
+    ORDER BY H
+
+#### [프로그래머스-입양 시각 구하기2](PRO/59413.sql)
+
+    SET @TIME := -1;
+    SELECT (@TIME := @TIME + 1), (SELECT COUNT(*) FROM ANIMAL_OUTS WHERE HOUR(DATETIME) = @TIME)
+    FROM ANIMAL_OUTS
+    WHERE @TIME <23
+    
+#### [프로그래머스-오랜 기간 보호 동물1](PRO/59044.sql)
+
+    SET ANIMAL_INS.ANIMAL_ID, ANIMAL_INS.DATETIME
+    FROM ANIMAL_INS
+    WHERE ANIMAL_INS.ANIMAL_ID NOT IN (SELECT ANIMAL_ID FROM ANIMAL_OUTS)
+    ORDER BY ANIMAL_INS.DATETIME
+    LIMIT 3;
 
 #### LIKE 
     
